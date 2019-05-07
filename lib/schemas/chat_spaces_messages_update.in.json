@@ -1,0 +1,831 @@
+{
+    "type": "object",
+    "properties": {
+        "name": {
+            "required": true,
+            "type": "string"
+        },
+        "updateMask": {
+            "type": "string"
+        },
+        "alt": {
+            "type": "string",
+            "enum": [
+                "json",
+                "media",
+                "proto"
+            ],
+            "default": "json"
+        },
+        "callback": {
+            "type": "string"
+        },
+        "fields": {
+            "type": "string"
+        },
+        "key": {
+            "type": "string"
+        },
+        "oauth_token": {
+            "type": "string"
+        },
+        "prettyPrint": {
+            "type": "boolean",
+            "default": true
+        },
+        "quotaUser": {
+            "type": "string"
+        },
+        "uploadType": {
+            "type": "string"
+        },
+        "upload_protocol": {
+            "type": "string"
+        },
+        "requestBody": {
+            "description": "A message in Hangouts Chat.",
+            "properties": {
+                "actionResponse": {
+                    "description": "Input only. Parameters that a bot can use to configure how its response is\nposted.",
+                    "properties": {
+                        "type": {
+                            "description": "The type of bot response.",
+                            "enum": [
+                                "TYPE_UNSPECIFIED",
+                                "NEW_MESSAGE",
+                                "UPDATE_MESSAGE",
+                                "REQUEST_CONFIG"
+                            ],
+                            "type": "string"
+                        },
+                        "url": {
+                            "description": "URL for users to auth or config. (Only for REQUEST_CONFIG response types.)",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "annotations": {
+                    "description": "Output only. Annotations associated with the text in this message.",
+                    "items": {
+                        "description": "Annotations associated with the plain-text body of the message.\n\nExample plain-text message body:\n```\nHello @FooBot how are you!\"\n```\n\nThe corresponding annotations metadata:\n```\n\"annotations\":[{\n  \"type\":\"USER_MENTION\",\n  \"startIndex\":6,\n  \"length\":7,\n  \"userMention\": {\n    \"user\": {\n      \"name\":\"users/107946847022116401880\",\n      \"displayName\":\"FooBot\",\n      \"avatarUrl\":\"https://goo.gl/aeDtrS\",\n      \"type\":\"BOT\"\n    },\n    \"type\":\"MENTION\"\n   }\n}]\n```",
+                        "properties": {
+                            "length": {
+                                "description": "Length of the substring in the plain-text message body this annotation\ncorresponds to.",
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "startIndex": {
+                                "description": "Start index (0-based, inclusive) in the plain-text message body this\nannotation corresponds to.",
+                                "format": "int32",
+                                "type": "integer"
+                            },
+                            "type": {
+                                "description": "The type of this annotation.",
+                                "enum": [
+                                    "ANNOTATION_TYPE_UNSPECIFIED",
+                                    "USER_MENTION"
+                                ],
+                                "type": "string"
+                            },
+                            "userMention": {
+                                "description": "The metadata of user mention.",
+                                "properties": {
+                                    "type": {
+                                        "description": "The type of user mention.",
+                                        "enum": [
+                                            "TYPE_UNSPECIFIED",
+                                            "ADD",
+                                            "MENTION"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "user": {
+                                        "description": "The user mentioned.",
+                                        "properties": {
+                                            "displayName": {
+                                                "description": "The user's display name.",
+                                                "type": "string"
+                                            },
+                                            "name": {
+                                                "description": "Resource name, in the format \"users/*\".",
+                                                "type": "string"
+                                            },
+                                            "type": {
+                                                "description": "User type.",
+                                                "enum": [
+                                                    "TYPE_UNSPECIFIED",
+                                                    "HUMAN",
+                                                    "BOT"
+                                                ],
+                                                "type": "string"
+                                            }
+                                        },
+                                        "type": "object"
+                                    }
+                                },
+                                "type": "object"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "argumentText": {
+                    "description": "Plain-text body of the message with all bot mentions stripped out.",
+                    "type": "string"
+                },
+                "cards": {
+                    "description": "Rich, formatted and interactive cards that can be used to display UI\nelements such as: formatted texts, buttons, clickable images. Cards are\nnormally displayed below the plain-text body of the message.",
+                    "items": {
+                        "description": "A card is a UI element that can contain UI widgets such as texts, images.",
+                        "properties": {
+                            "cardActions": {
+                                "description": "The actions of this card.",
+                                "items": {
+                                    "description": "A card action is\nthe action associated with the card. For an invoice card, a\ntypical action would be: delete invoice, email invoice or open the\ninvoice in browser.",
+                                    "properties": {
+                                        "actionLabel": {
+                                            "description": "The label used to be displayed in the action menu item.",
+                                            "type": "string"
+                                        },
+                                        "onClick": {
+                                            "description": "The onclick action for this action item.",
+                                            "properties": {
+                                                "action": {
+                                                    "description": "A form action will be trigger by this onclick if specified.",
+                                                    "properties": {
+                                                        "actionMethodName": {
+                                                            "description": "Apps Script function to invoke when the containing element is\nclicked/activated.",
+                                                            "type": "string"
+                                                        },
+                                                        "parameters": {
+                                                            "description": "List of action parameters.",
+                                                            "items": {
+                                                                "description": "List of string parameters to supply when the action method is invoked.\nFor example, consider three snooze buttons: snooze now, snooze 1 day,\nsnooze next week. You might use action method = snooze(), passing the\nsnooze type and snooze time in the list of string parameters.",
+                                                                "properties": {
+                                                                    "key": {
+                                                                        "description": "The name of the parameter for the action script.",
+                                                                        "type": "string"
+                                                                    },
+                                                                    "value": {
+                                                                        "description": "The value of the parameter.",
+                                                                        "type": "string"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "type": "array"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                },
+                                                "openLink": {
+                                                    "description": "This onclick triggers an open link action if specified.",
+                                                    "properties": {
+                                                        "url": {
+                                                            "description": "The URL to open.",
+                                                            "type": "string"
+                                                        }
+                                                    },
+                                                    "type": "object"
+                                                }
+                                            },
+                                            "type": "object"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            },
+                            "header": {
+                                "description": "The header of the card. A header usually contains a title and an image.",
+                                "properties": {
+                                    "imageStyle": {
+                                        "description": "The image's type (e.g. square border or circular border).",
+                                        "enum": [
+                                            "IMAGE_STYLE_UNSPECIFIED",
+                                            "IMAGE",
+                                            "AVATAR"
+                                        ],
+                                        "type": "string"
+                                    },
+                                    "imageUrl": {
+                                        "description": "The URL of the image in the card header.",
+                                        "type": "string"
+                                    },
+                                    "subtitle": {
+                                        "description": "The subtitle of the card header.",
+                                        "type": "string"
+                                    },
+                                    "title": {
+                                        "description": "The title must be specified. The header has a fixed height: if both a\ntitle and subtitle is specified, each will take up 1 line. If only the\ntitle is specified, it will take up both lines.",
+                                        "type": "string"
+                                    }
+                                },
+                                "type": "object"
+                            },
+                            "name": {
+                                "description": "Name of the card.",
+                                "type": "string"
+                            },
+                            "sections": {
+                                "description": "Sections are separated by a line divider.",
+                                "items": {
+                                    "description": "A section contains a collection of widgets that are rendered\n(vertically) in the order that they are specified. Across all platforms,\ncards have a narrow fixed width, so\nthere is currently no need for layout properties (e.g. float).",
+                                    "properties": {
+                                        "header": {
+                                            "description": "The header of the section, text formatted supported.",
+                                            "type": "string"
+                                        },
+                                        "widgets": {
+                                            "description": "A section must contain at least 1 widget.",
+                                            "items": {
+                                                "description": "A widget is a UI element that presents texts, images, etc.",
+                                                "properties": {
+                                                    "buttons": {
+                                                        "description": "A list of buttons. Buttons is also oneof data and only one of these\nfields should be set.",
+                                                        "items": {
+                                                            "description": "A button. Can be a text button or an image button.",
+                                                            "properties": {
+                                                                "imageButton": {
+                                                                    "description": "A button with image and onclick action.",
+                                                                    "properties": {
+                                                                        "icon": {
+                                                                            "description": "The icon specified by an enum that indices to an icon provided by Chat\nAPI.",
+                                                                            "enum": [
+                                                                                "ICON_UNSPECIFIED",
+                                                                                "AIRPLANE",
+                                                                                "BOOKMARK",
+                                                                                "BUS",
+                                                                                "CAR",
+                                                                                "CLOCK",
+                                                                                "CONFIRMATION_NUMBER_ICON",
+                                                                                "DOLLAR",
+                                                                                "DESCRIPTION",
+                                                                                "EMAIL",
+                                                                                "EVENT_PERFORMER",
+                                                                                "EVENT_SEAT",
+                                                                                "FLIGHT_ARRIVAL",
+                                                                                "FLIGHT_DEPARTURE",
+                                                                                "HOTEL",
+                                                                                "HOTEL_ROOM_TYPE",
+                                                                                "INVITE",
+                                                                                "MAP_PIN",
+                                                                                "MEMBERSHIP",
+                                                                                "MULTIPLE_PEOPLE",
+                                                                                "OFFER",
+                                                                                "PERSON",
+                                                                                "PHONE",
+                                                                                "RESTAURANT_ICON",
+                                                                                "SHOPPING_CART",
+                                                                                "STAR",
+                                                                                "STORE",
+                                                                                "TICKET",
+                                                                                "TRAIN",
+                                                                                "VIDEO_CAMERA",
+                                                                                "VIDEO_PLAY"
+                                                                            ],
+                                                                            "type": "string"
+                                                                        },
+                                                                        "iconUrl": {
+                                                                            "description": "The icon specified by a URL.",
+                                                                            "type": "string"
+                                                                        },
+                                                                        "name": {
+                                                                            "description": "The name of this image_button which will be used for accessibility.\nDefault value will be provided if developers don't specify.",
+                                                                            "type": "string"
+                                                                        },
+                                                                        "onClick": {
+                                                                            "description": "The onclick action.",
+                                                                            "properties": {
+                                                                                "action": {
+                                                                                    "description": "A form action will be trigger by this onclick if specified.",
+                                                                                    "properties": {
+                                                                                        "actionMethodName": {
+                                                                                            "description": "Apps Script function to invoke when the containing element is\nclicked/activated.",
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "parameters": {
+                                                                                            "description": "List of action parameters.",
+                                                                                            "items": {
+                                                                                                "description": "List of string parameters to supply when the action method is invoked.\nFor example, consider three snooze buttons: snooze now, snooze 1 day,\nsnooze next week. You might use action method = snooze(), passing the\nsnooze type and snooze time in the list of string parameters.",
+                                                                                                "properties": {
+                                                                                                    "key": {
+                                                                                                        "description": "The name of the parameter for the action script.",
+                                                                                                        "type": "string"
+                                                                                                    },
+                                                                                                    "value": {
+                                                                                                        "description": "The value of the parameter.",
+                                                                                                        "type": "string"
+                                                                                                    }
+                                                                                                },
+                                                                                                "type": "object"
+                                                                                            },
+                                                                                            "type": "array"
+                                                                                        }
+                                                                                    },
+                                                                                    "type": "object"
+                                                                                },
+                                                                                "openLink": {
+                                                                                    "description": "This onclick triggers an open link action if specified.",
+                                                                                    "properties": {
+                                                                                        "url": {
+                                                                                            "description": "The URL to open.",
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    },
+                                                                                    "type": "object"
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                },
+                                                                "textButton": {
+                                                                    "description": "A button with text and onclick action.",
+                                                                    "properties": {
+                                                                        "onClick": {
+                                                                            "description": "The onclick action of the button.",
+                                                                            "properties": {
+                                                                                "action": {
+                                                                                    "description": "A form action will be trigger by this onclick if specified.",
+                                                                                    "properties": {
+                                                                                        "actionMethodName": {
+                                                                                            "description": "Apps Script function to invoke when the containing element is\nclicked/activated.",
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "parameters": {
+                                                                                            "description": "List of action parameters.",
+                                                                                            "items": {
+                                                                                                "description": "List of string parameters to supply when the action method is invoked.\nFor example, consider three snooze buttons: snooze now, snooze 1 day,\nsnooze next week. You might use action method = snooze(), passing the\nsnooze type and snooze time in the list of string parameters.",
+                                                                                                "properties": {
+                                                                                                    "key": {
+                                                                                                        "description": "The name of the parameter for the action script.",
+                                                                                                        "type": "string"
+                                                                                                    },
+                                                                                                    "value": {
+                                                                                                        "description": "The value of the parameter.",
+                                                                                                        "type": "string"
+                                                                                                    }
+                                                                                                },
+                                                                                                "type": "object"
+                                                                                            },
+                                                                                            "type": "array"
+                                                                                        }
+                                                                                    },
+                                                                                    "type": "object"
+                                                                                },
+                                                                                "openLink": {
+                                                                                    "description": "This onclick triggers an open link action if specified.",
+                                                                                    "properties": {
+                                                                                        "url": {
+                                                                                            "description": "The URL to open.",
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    },
+                                                                                    "type": "object"
+                                                                                }
+                                                                            },
+                                                                            "type": "object"
+                                                                        },
+                                                                        "text": {
+                                                                            "description": "The text of the button.",
+                                                                            "type": "string"
+                                                                        }
+                                                                    },
+                                                                    "type": "object"
+                                                                }
+                                                            },
+                                                            "type": "object"
+                                                        },
+                                                        "type": "array"
+                                                    },
+                                                    "image": {
+                                                        "description": "Display an image in this widget.",
+                                                        "properties": {
+                                                            "aspectRatio": {
+                                                                "description": "The aspect ratio of this image (width/height).",
+                                                                "format": "double",
+                                                                "type": "number"
+                                                            },
+                                                            "imageUrl": {
+                                                                "description": "The URL of the image.",
+                                                                "type": "string"
+                                                            },
+                                                            "onClick": {
+                                                                "description": "The onclick action.",
+                                                                "properties": {
+                                                                    "action": {
+                                                                        "description": "A form action will be trigger by this onclick if specified.",
+                                                                        "properties": {
+                                                                            "actionMethodName": {
+                                                                                "description": "Apps Script function to invoke when the containing element is\nclicked/activated.",
+                                                                                "type": "string"
+                                                                            },
+                                                                            "parameters": {
+                                                                                "description": "List of action parameters.",
+                                                                                "items": {
+                                                                                    "description": "List of string parameters to supply when the action method is invoked.\nFor example, consider three snooze buttons: snooze now, snooze 1 day,\nsnooze next week. You might use action method = snooze(), passing the\nsnooze type and snooze time in the list of string parameters.",
+                                                                                    "properties": {
+                                                                                        "key": {
+                                                                                            "description": "The name of the parameter for the action script.",
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "value": {
+                                                                                            "description": "The value of the parameter.",
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    },
+                                                                                    "type": "object"
+                                                                                },
+                                                                                "type": "array"
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    },
+                                                                    "openLink": {
+                                                                        "description": "This onclick triggers an open link action if specified.",
+                                                                        "properties": {
+                                                                            "url": {
+                                                                                "description": "The URL to open.",
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "keyValue": {
+                                                        "description": "Display a key value item in this widget.",
+                                                        "properties": {
+                                                            "bottomLabel": {
+                                                                "description": "The text of the bottom label. Formatted text supported.",
+                                                                "type": "string"
+                                                            },
+                                                            "button": {
+                                                                "description": "A button that can be clicked to trigger an action.",
+                                                                "properties": {
+                                                                    "imageButton": {
+                                                                        "description": "A button with image and onclick action.",
+                                                                        "properties": {
+                                                                            "icon": {
+                                                                                "description": "The icon specified by an enum that indices to an icon provided by Chat\nAPI.",
+                                                                                "enum": [
+                                                                                    "ICON_UNSPECIFIED",
+                                                                                    "AIRPLANE",
+                                                                                    "BOOKMARK",
+                                                                                    "BUS",
+                                                                                    "CAR",
+                                                                                    "CLOCK",
+                                                                                    "CONFIRMATION_NUMBER_ICON",
+                                                                                    "DOLLAR",
+                                                                                    "DESCRIPTION",
+                                                                                    "EMAIL",
+                                                                                    "EVENT_PERFORMER",
+                                                                                    "EVENT_SEAT",
+                                                                                    "FLIGHT_ARRIVAL",
+                                                                                    "FLIGHT_DEPARTURE",
+                                                                                    "HOTEL",
+                                                                                    "HOTEL_ROOM_TYPE",
+                                                                                    "INVITE",
+                                                                                    "MAP_PIN",
+                                                                                    "MEMBERSHIP",
+                                                                                    "MULTIPLE_PEOPLE",
+                                                                                    "OFFER",
+                                                                                    "PERSON",
+                                                                                    "PHONE",
+                                                                                    "RESTAURANT_ICON",
+                                                                                    "SHOPPING_CART",
+                                                                                    "STAR",
+                                                                                    "STORE",
+                                                                                    "TICKET",
+                                                                                    "TRAIN",
+                                                                                    "VIDEO_CAMERA",
+                                                                                    "VIDEO_PLAY"
+                                                                                ],
+                                                                                "type": "string"
+                                                                            },
+                                                                            "iconUrl": {
+                                                                                "description": "The icon specified by a URL.",
+                                                                                "type": "string"
+                                                                            },
+                                                                            "name": {
+                                                                                "description": "The name of this image_button which will be used for accessibility.\nDefault value will be provided if developers don't specify.",
+                                                                                "type": "string"
+                                                                            },
+                                                                            "onClick": {
+                                                                                "description": "The onclick action.",
+                                                                                "properties": {
+                                                                                    "action": {
+                                                                                        "description": "A form action will be trigger by this onclick if specified.",
+                                                                                        "properties": {
+                                                                                            "actionMethodName": {
+                                                                                                "description": "Apps Script function to invoke when the containing element is\nclicked/activated.",
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "parameters": {
+                                                                                                "description": "List of action parameters.",
+                                                                                                "items": {
+                                                                                                    "description": "List of string parameters to supply when the action method is invoked.\nFor example, consider three snooze buttons: snooze now, snooze 1 day,\nsnooze next week. You might use action method = snooze(), passing the\nsnooze type and snooze time in the list of string parameters.",
+                                                                                                    "properties": {
+                                                                                                        "key": {
+                                                                                                            "description": "The name of the parameter for the action script.",
+                                                                                                            "type": "string"
+                                                                                                        },
+                                                                                                        "value": {
+                                                                                                            "description": "The value of the parameter.",
+                                                                                                            "type": "string"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "type": "object"
+                                                                                                },
+                                                                                                "type": "array"
+                                                                                            }
+                                                                                        },
+                                                                                        "type": "object"
+                                                                                    },
+                                                                                    "openLink": {
+                                                                                        "description": "This onclick triggers an open link action if specified.",
+                                                                                        "properties": {
+                                                                                            "url": {
+                                                                                                "description": "The URL to open.",
+                                                                                                "type": "string"
+                                                                                            }
+                                                                                        },
+                                                                                        "type": "object"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    },
+                                                                    "textButton": {
+                                                                        "description": "A button with text and onclick action.",
+                                                                        "properties": {
+                                                                            "onClick": {
+                                                                                "description": "The onclick action of the button.",
+                                                                                "properties": {
+                                                                                    "action": {
+                                                                                        "description": "A form action will be trigger by this onclick if specified.",
+                                                                                        "properties": {
+                                                                                            "actionMethodName": {
+                                                                                                "description": "Apps Script function to invoke when the containing element is\nclicked/activated.",
+                                                                                                "type": "string"
+                                                                                            },
+                                                                                            "parameters": {
+                                                                                                "description": "List of action parameters.",
+                                                                                                "items": {
+                                                                                                    "description": "List of string parameters to supply when the action method is invoked.\nFor example, consider three snooze buttons: snooze now, snooze 1 day,\nsnooze next week. You might use action method = snooze(), passing the\nsnooze type and snooze time in the list of string parameters.",
+                                                                                                    "properties": {
+                                                                                                        "key": {
+                                                                                                            "description": "The name of the parameter for the action script.",
+                                                                                                            "type": "string"
+                                                                                                        },
+                                                                                                        "value": {
+                                                                                                            "description": "The value of the parameter.",
+                                                                                                            "type": "string"
+                                                                                                        }
+                                                                                                    },
+                                                                                                    "type": "object"
+                                                                                                },
+                                                                                                "type": "array"
+                                                                                            }
+                                                                                        },
+                                                                                        "type": "object"
+                                                                                    },
+                                                                                    "openLink": {
+                                                                                        "description": "This onclick triggers an open link action if specified.",
+                                                                                        "properties": {
+                                                                                            "url": {
+                                                                                                "description": "The URL to open.",
+                                                                                                "type": "string"
+                                                                                            }
+                                                                                        },
+                                                                                        "type": "object"
+                                                                                    }
+                                                                                },
+                                                                                "type": "object"
+                                                                            },
+                                                                            "text": {
+                                                                                "description": "The text of the button.",
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "content": {
+                                                                "description": "The text of the content. Formatted text supported and always required.",
+                                                                "type": "string"
+                                                            },
+                                                            "contentMultiline": {
+                                                                "description": "If the content should be multiline.",
+                                                                "type": "boolean"
+                                                            },
+                                                            "icon": {
+                                                                "description": "An enum value that will be replaced by the Chat API with the\ncorresponding icon image.",
+                                                                "enum": [
+                                                                    "ICON_UNSPECIFIED",
+                                                                    "AIRPLANE",
+                                                                    "BOOKMARK",
+                                                                    "BUS",
+                                                                    "CAR",
+                                                                    "CLOCK",
+                                                                    "CONFIRMATION_NUMBER_ICON",
+                                                                    "DOLLAR",
+                                                                    "DESCRIPTION",
+                                                                    "EMAIL",
+                                                                    "EVENT_PERFORMER",
+                                                                    "EVENT_SEAT",
+                                                                    "FLIGHT_ARRIVAL",
+                                                                    "FLIGHT_DEPARTURE",
+                                                                    "HOTEL",
+                                                                    "HOTEL_ROOM_TYPE",
+                                                                    "INVITE",
+                                                                    "MAP_PIN",
+                                                                    "MEMBERSHIP",
+                                                                    "MULTIPLE_PEOPLE",
+                                                                    "OFFER",
+                                                                    "PERSON",
+                                                                    "PHONE",
+                                                                    "RESTAURANT_ICON",
+                                                                    "SHOPPING_CART",
+                                                                    "STAR",
+                                                                    "STORE",
+                                                                    "TICKET",
+                                                                    "TRAIN",
+                                                                    "VIDEO_CAMERA",
+                                                                    "VIDEO_PLAY"
+                                                                ],
+                                                                "type": "string"
+                                                            },
+                                                            "iconUrl": {
+                                                                "description": "The icon specified by a URL.",
+                                                                "type": "string"
+                                                            },
+                                                            "onClick": {
+                                                                "description": "The onclick action. Only the top label, bottom label and content region\nare clickable.",
+                                                                "properties": {
+                                                                    "action": {
+                                                                        "description": "A form action will be trigger by this onclick if specified.",
+                                                                        "properties": {
+                                                                            "actionMethodName": {
+                                                                                "description": "Apps Script function to invoke when the containing element is\nclicked/activated.",
+                                                                                "type": "string"
+                                                                            },
+                                                                            "parameters": {
+                                                                                "description": "List of action parameters.",
+                                                                                "items": {
+                                                                                    "description": "List of string parameters to supply when the action method is invoked.\nFor example, consider three snooze buttons: snooze now, snooze 1 day,\nsnooze next week. You might use action method = snooze(), passing the\nsnooze type and snooze time in the list of string parameters.",
+                                                                                    "properties": {
+                                                                                        "key": {
+                                                                                            "description": "The name of the parameter for the action script.",
+                                                                                            "type": "string"
+                                                                                        },
+                                                                                        "value": {
+                                                                                            "description": "The value of the parameter.",
+                                                                                            "type": "string"
+                                                                                        }
+                                                                                    },
+                                                                                    "type": "object"
+                                                                                },
+                                                                                "type": "array"
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    },
+                                                                    "openLink": {
+                                                                        "description": "This onclick triggers an open link action if specified.",
+                                                                        "properties": {
+                                                                            "url": {
+                                                                                "description": "The URL to open.",
+                                                                                "type": "string"
+                                                                            }
+                                                                        },
+                                                                        "type": "object"
+                                                                    }
+                                                                },
+                                                                "type": "object"
+                                                            },
+                                                            "topLabel": {
+                                                                "description": "The text of the top label. Formatted text supported.",
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    },
+                                                    "textParagraph": {
+                                                        "description": "Display a text paragraph in this widget.",
+                                                        "properties": {
+                                                            "text": {
+                                                                "type": "string"
+                                                            }
+                                                        },
+                                                        "type": "object"
+                                                    }
+                                                },
+                                                "type": "object"
+                                            },
+                                            "type": "array"
+                                        }
+                                    },
+                                    "type": "object"
+                                },
+                                "type": "array"
+                            }
+                        },
+                        "type": "object"
+                    },
+                    "type": "array"
+                },
+                "createTime": {
+                    "description": "Output only. The time at which the message was created in Hangouts Chat\nserver.",
+                    "format": "google-datetime",
+                    "type": "string"
+                },
+                "fallbackText": {
+                    "description": "A plain-text description of the message's cards, used when the actual cards\ncannot be displayed (e.g. mobile notifications).",
+                    "type": "string"
+                },
+                "name": {
+                    "description": "Resource name, in the form \"spaces/*/messages/*\".\n\nExample: spaces/AAAAMpdlehY/messages/UMxbHmzDlr4.UMxbHmzDlr4",
+                    "type": "string"
+                },
+                "previewText": {
+                    "description": "Text for generating preview chips. This text will not be displayed to the\nuser, but any links to images, web pages, videos, etc. included here will\ngenerate preview chips.",
+                    "type": "string"
+                },
+                "sender": {
+                    "description": "The user who created the message.",
+                    "properties": {
+                        "displayName": {
+                            "description": "The user's display name.",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name, in the format \"users/*\".",
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "User type.",
+                            "enum": [
+                                "TYPE_UNSPECIFIED",
+                                "HUMAN",
+                                "BOT"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "space": {
+                    "description": "The space the message belongs to.",
+                    "properties": {
+                        "displayName": {
+                            "description": "Output only. The display name (only if the space is a room).",
+                            "type": "string"
+                        },
+                        "name": {
+                            "description": "Resource name of the space, in the form \"spaces/*\".\n\nExample: spaces/AAAAMpdlehYs",
+                            "type": "string"
+                        },
+                        "type": {
+                            "description": "Output only. The type of a space.",
+                            "enum": [
+                                "TYPE_UNSPECIFIED",
+                                "ROOM",
+                                "DM"
+                            ],
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                },
+                "text": {
+                    "description": "Plain-text body of the message.",
+                    "type": "string"
+                },
+                "thread": {
+                    "description": "The thread the message belongs to.",
+                    "properties": {
+                        "name": {
+                            "description": "Resource name, in the form \"spaces/*/threads/*\".\n\nExample: spaces/AAAAMpdlehY/threads/UMxbHmzDlr4",
+                            "type": "string"
+                        }
+                    },
+                    "type": "object"
+                }
+            },
+            "type": "object"
+        }
+    }
+}

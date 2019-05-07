@@ -1,0 +1,136 @@
+{
+    "title": "Hangouts Chat",
+    "description": "Enables bots to fetch information and perform actions in Hangouts Chat.",
+    "docsUrl": "https://developers.google.com/hangouts/chat",
+    "url": "https://api.apis.guru/v2/specs/googleapis.com/chat/v1/swagger.json",
+    "envVars": {},
+    "credentials": {
+        "fields": {
+            "server": {
+                "label": "Server",
+                "viewClass": "SelectView",
+                "model": [
+                    "https://chat.googleapis.com/",
+                    "--- Custom URL"
+                ],
+                "required": true
+            },
+            "otherServer": {
+                "label": "Custom Server URL",
+                "viewClass": "TextFieldView"
+            }
+        }
+    },
+    "triggers": {
+        "startFlow": {
+            "main": "./lib/triggers/startFlow.js",
+            "type": "polling",
+            "title": "Start Flow",
+            "fields": {}
+        }
+    },
+    "actions": {
+        "chat_spaces_list": {
+            "main": "./lib/actions/chat_spaces_list.js",
+            "title": "Lists spaces the caller is a member of.",
+            "description": "Lists spaces the caller is a member of.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/chat_spaces_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "chat_spaces_messages_delete": {
+            "main": "./lib/actions/chat_spaces_messages_delete.js",
+            "title": "Deletes a message.",
+            "description": "Deletes a message.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/chat_spaces_messages_delete.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "chat_spaces_messages_get": {
+            "main": "./lib/actions/chat_spaces_messages_get.js",
+            "title": "Returns a message.",
+            "description": "Returns a message.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/chat_spaces_messages_get.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "chat_spaces_messages_update": {
+            "main": "./lib/actions/chat_spaces_messages_update.js",
+            "title": "Updates a message.",
+            "description": "Updates a message.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/chat_spaces_messages_update.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "chat_spaces_members_list": {
+            "main": "./lib/actions/chat_spaces_members_list.js",
+            "title": "Lists human memberships in a space.",
+            "description": "Lists human memberships in a space.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/chat_spaces_members_list.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        },
+        "chat_spaces_messages_create": {
+            "main": "./lib/actions/chat_spaces_messages_create.js",
+            "title": "Creates a message.",
+            "description": "Creates a message.",
+            "fields": {
+                "verbose": {
+                    "viewClass": "CheckBoxView",
+                    "label": "Debug this step (log more data)"
+                }
+            },
+            "metadata": {
+                "in": "./lib/schemas/chat_spaces_messages_create.in.json",
+                "out": {
+                    "type": "object"
+                }
+            }
+        }
+    }
+}
